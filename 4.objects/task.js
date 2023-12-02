@@ -11,31 +11,26 @@ Student.prototype.setSubject = function (subjectName) {
 
 Student.prototype.addMarks = function (...marks) {
   if(this.marks){
-    this.marks = [...this.marks, ...marks];
+    this.marks.push(...marks);
   }
 }
 
 Student.prototype.getAverage = function () {
-//   console.log(this.marks);
-  let avg = 0;
-  if(this.marks && this.marks.length > 0){
-    avg = this.marks.reduce((sum,mark,i,marks)=>{
-        sum += mark;
-        // console.log(mark,sum,sum / marks.length);
+  if(!this.marks || this.marks.length === 0)
+    return 0;
+  let avg = this.marks.reduce((sum,mark,i,marks)=>{
+        sum+= mark;
         if(i === marks.length - 1){
             return sum / marks.length;
         }
         return sum;
-    },0)
-  }else{
-    avg = 0;
-  }
+    }, 0)
   return avg;
 }
 
 Student.prototype.exclude = function (reason) {
-  if(this.subject) delete this.subject;
-  if(this.marks) delete this.marks;
+  delete this.subject;
+  delete this.marks;
   this.excluded = reason;
 }
 
