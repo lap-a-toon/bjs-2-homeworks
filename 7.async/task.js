@@ -24,7 +24,7 @@ class AlarmClock {
     }
     checkTimer(time){
         let qwe = this.alarmCollection.filter(alarm => alarm.time === time);
-        return qwe.length?true:false;
+        return (!!qwe.length);
     }
     getCurrentFormattedTime(){
         const currentTime = new Date();
